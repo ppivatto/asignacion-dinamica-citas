@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Procesos y Orquestación</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: #f6f8fc;
+      margin: 0;
+      color: #1b1f2a;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      margin-bottom: 4px
+    }
+
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 24px
+    }
+
+    /* Accordion */
+    .process {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .process-header {
+      padding: 16px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .process-header:hover {
+      background: #f9fafb;
+    }
+
+    .process-title {
+      font-weight: 800;
+    }
+
+    .process-short {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .chevron {
+      font-size: 20px;
+      transition: transform .2s ease;
+    }
+
+    .process.open .chevron {
+      transform: rotate(90deg);
+    }
+
+    .process-body {
+      display: none;
+      padding: 16px;
+      border-top: 1px dashed #e5e7eb;
+      background: #fbfdff;
+    }
+
+    .process.open .process-body {
+      display: block;
+    }
+
+    .block {
+      margin-bottom: 14px;
+    }
+
+    .block-title {
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      color: #374151;
+    }
+
+    .block p {
+      margin: 0;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #eef2ff;
+      color: #1f74ff;
+    }
+
+    /* ================= TOPBAR ================= */
+
+    .topbar{
+      background:#ffffff;
+      border-bottom:1px solid #e5e7eb;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+
+    .topbar .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .logo{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      background:linear-gradient(135deg,#1f74ff,#0b4fd6);
+      flex-shrink:0;
+    }
+
+    .brand .title{
+      font-weight:800;
+      font-size:16px;
+    }
+
+    .menu{
+      margin-left:auto;
+      display:flex;
+      gap:10px;
+    }
+
+    .menu a{
+      font-size:14px;
+      font-weight:600;
+      color:#374151;
+      text-decoration:none;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid #e5e7eb;
+      background:#ffffff;
+    }
+
+    .menu a:hover{
+      border-color:rgba(31,116,255,.35);
+      background:rgba(31,116,255,.04);
+    }
+
+    .menu a.active{
+      border-color:rgba(31,116,255,.35);
+      background:rgba(31,116,255,.10);
+      color:#1f74ff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= TOPBAR ================= -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="logo"></div>
+
+    <div class="brand">
+      <div class="title">Asignación Dinámica de Citas</div>
+    </div>
+
+    <nav class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="pantalla-1-experiencia-asignacion-dinamica.html">Experiencia</a>
+      <a href="pantalla-2-operacion-capacidad-clinica.html">Operación</a>
+      <a href="pantalla-3-procesos-orquestacion.html" class="active">Procesos</a>
+    </nav>
+  </div>
+</div>
+  <!-- ====================================================== -->
+
+  <div class="container">
+    <h1>Procesos y Orquestación</h1>
+    <div class="subtitle">Asignación Dinámica de Citas y Capacidad Clínica</div>
+
+    <!-- P1 -->
+    <div class="process">
+      <div class="process-header">
+        <div>
+          <div class="process-title">P1 · Captura de intención</div>
+          <div class="process-short">El paciente define su necesidad real de horario</div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+
+      <div class="process-body">
+
+        <!-- Qué implica -->
+        <div class="block">
+          <div class="block-title">Qué implica</div>
+          <p>
+            Registra día, horario y condiciones deseadas cuando no hay disponibilidad
+            en la agenda estándar. La solicitud queda formalizada para evaluación posterior.
+          </p>
+        </div>
+
+        <!-- Flujo resumido -->
+        <div class="block">
+          <div class="block-title">Flujo resumido</div>
+          <p>
+            Paciente busca horario específico →
+            no hay disponibilidad estándar →
+            completa solicitud alternativa →
+            el sistema registra la intención
+          </p>
+        </div>
+
+        <!-- Pantallas relacionadas -->
+        <div class="block">
+          <div class="block-title">Pantallas relacionadas</div>
+          <p>
+            <b>Se dispara desde:</b> Pantalla Paciente – “Te buscamos horario”<br>
+            <b>Impacta en:</b> Pantalla Paciente – Estado de la solicitud
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="block">
+          <span class="tag">Trigger UI · Paciente</span>
+          <span class="tag">Inicio del proceso</span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- P2 -->
+    <div class="process">
+      <div class="process-header">
+        <div>
+          <div class="process-title">P2 · Evaluar disponibilidad</div>
+          <div class="process-short">Verifica si la agenda existente puede resolver la solicitud</div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+
+      <div class="process-body">
+
+        <!-- Qué implica -->
+        <div class="block">
+          <div class="block-title">Qué implica</div>
+          <p>
+            Consulta la agenda de la clínica cruzando horarios de apertura,
+            boxes disponibles y disponibilidad de profesionales para detectar
+            slots compatibles con la solicitud del paciente.
+          </p>
+        </div>
+
+        <!-- Flujo resumido -->
+        <div class="block">
+          <div class="block-title">Flujo resumido</div>
+          <p>
+            Sistema recibe solicitud →
+            consulta agenda existente →
+            evalúa clínica + boxes + profesionales →
+            determina si hay slot compatible
+          </p>
+        </div>
+
+        <!-- Pantallas relacionadas -->
+        <div class="block">
+          <div class="block-title">Pantallas relacionadas</div>
+          <p>
+            <b>Se dispara después de:</b> P1 – Captura de intención<br>
+            <b>Visible para:</b> No visible al usuario (proceso interno)<br>
+            <b>Impacta en:</b>
+          <ul>
+            <li>Agenda estándar (si hay disponibilidad)</li>
+            <li><b>P3 – Publicar oportunidad</b> (si no hay disponibilidad)</li>
+          </ul>
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="block">
+          <span class="tag">Proceso BPM</span>
+          <span class="tag">Evaluación automática</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="process">
+      <div class="process-header">
+        <div>
+          <div class="process-title">P3 · Publicar oportunidad</div>
+          <div class="process-short">Se crea una oportunidad para profesionales elegibles</div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+
+      <div class="process-body">
+
+        <!-- Qué implica -->
+        <div class="block">
+          <div class="block-title">Qué implica</div>
+          <p>
+            Genera una oportunidad estructurada a partir de la solicitud del paciente,
+            definiendo clínica, especialidad, fecha, horario y duración,
+            sin asignar aún un profesional.
+          </p>
+        </div>
+
+        <!-- Flujo resumido -->
+        <div class="block">
+          <div class="block-title">Flujo resumido</div>
+          <p>
+            No hay disponibilidad estándar →
+            se crea oportunidad →
+            se prepara para notificación a profesionales elegibles
+          </p>
+        </div>
+
+        <!-- Pantallas relacionadas -->
+        <div class="block">
+          <div class="block-title">Pantallas relacionadas</div>
+          <p>
+            <b>Se dispara después de:</b> P2 – Evaluar disponibilidad<br>
+            <b>Impacta en:</b>
+          <ul>
+            <li><b>Pantalla Profesional – Landing de aceptación</b></li>
+            <li><b>Pantalla Operación – Monitoreo de oportunidades</b></li>
+          </ul>
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="block">
+          <span class="tag">Orquestación</span>
+          <span class="tag">Marketplace interno</span>
+          <span class="tag">Pre-notificación</span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- P4 -->
+    <div class="process">
+      <div class="process-header">
+        <div>
+          <div class="process-title">P4 · Matching</div>
+          <div class="process-short">Profesionales aceptan la oportunidad disponible</div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+
+      <div class="process-body">
+
+        <!-- Qué implica -->
+        <div class="block">
+          <div class="block-title">Qué implica</div>
+          <p>
+            Notifica a profesionales elegibles y gestiona aceptación concurrente.
+            El primer profesional que acepta la oportunidad queda asignado.
+          </p>
+        </div>
+
+        <!-- Flujo resumido -->
+        <div class="block">
+          <div class="block-title">Flujo resumido</div>
+          <p>
+            Oportunidad publicada →
+            notificación a profesionales →
+            aceptación →
+            bloqueo automático para otros
+          </p>
+        </div>
+
+        <!-- Pantallas relacionadas -->
+        <div class="block">
+          <div class="block-title">Pantallas relacionadas</div>
+          <p>
+            <b>Se dispara después de:</b> P3 – Publicar oportunidad<br>
+            <b>Interacción principal:</b>
+          <ul>
+            <li><b>Pantalla Profesional – Landing de aceptación</b></li>
+          </ul>
+          <b>Seguimiento:</b>
+          <ul>
+            <li><b>Pantalla Operación – Monitoreo</b></li>
+          </ul>
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="block">
+          <span class="tag">Notificaciones</span>
+          <span class="tag">Aceptación concurrente</span>
+          <span class="tag">Reglas de prioridad</span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- P5 -->
+    <div class="process">
+      <div class="process-header">
+        <div>
+          <div class="process-title">P5 · Confirmación</div>
+          <div class="process-short">Se asigna el box y se confirma la cita</div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+
+      <div class="process-body">
+
+        <!-- Qué implica -->
+        <div class="block">
+          <div class="block-title">Qué implica</div>
+          <p>
+            Con la aceptación del profesional, el sistema asigna box y horario,
+            crea o actualiza la agenda oficial y deja la cita confirmada.
+          </p>
+        </div>
+
+        <!-- Flujo resumido -->
+        <div class="block">
+          <div class="block-title">Flujo resumido</div>
+          <p>
+            Profesional acepta →
+            se asigna box →
+            se crea agenda →
+            se confirma cita
+          </p>
+        </div>
+
+        <!-- Pantallas relacionadas -->
+        <div class="block">
+          <div class="block-title">Pantallas relacionadas</div>
+          <p>
+            <b>Se dispara después de:</b> P4 – Matching<br>
+            <b>Impacta en:</b>
+          <ul>
+            <li><b>Pantalla Paciente – Confirmación / Estado final</b></li>
+            <li><b>Pantalla Operación – Caso cerrado</b></li>
+          </ul>
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="block">
+          <span class="tag">Asignación de box</span>
+          <span class="tag">Confirmación automática</span>
+          <span class="tag">Cierre del circuito</span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- P6 -->
+    <div class="process">
+      <div class="process-header">
+        <div>
+          <div class="process-title">P6 · Expiración / cancelación</div>
+          <div class="process-short">Cierre automático o manual de oportunidades</div>
+        </div>
+        <div class="chevron">›</div>
+      </div>
+
+      <div class="process-body">
+
+        <!-- Qué implica -->
+        <div class="block">
+          <div class="block-title">Qué implica</div>
+          <p>
+            Finaliza oportunidades que no fueron aceptadas dentro del tiempo definido,
+            o que se cancelan por decisión operativa o del paciente.
+          </p>
+        </div>
+
+        <!-- Flujo resumido -->
+        <div class="block">
+          <div class="block-title">Flujo resumido</div>
+          <p>
+            Oportunidad sin aceptación →
+            expira automáticamente →
+            se cierra el caso o se ofrece alternativa
+          </p>
+        </div>
+
+        <!-- Pantallas relacionadas -->
+        <div class="block">
+          <div class="block-title">Pantallas relacionadas</div>
+          <p>
+            <b>Se dispara desde:</b> P3 o P4 (sin aceptación)<br>
+            <b>Impacta en:</b>
+          <ul>
+            <li><b>Pantalla Operación – Gestión de excepciones</b></li>
+            <li><b>Pantalla Paciente – Estado final / alternativas</b></li>
+          </ul>
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="block">
+          <span class="tag">Expiración automática</span>
+          <span class="tag">Cancelación manual</span>
+          <span class="tag">Higiene del sistema</span>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <script>
+    document.querySelectorAll(".process-header").forEach(h => {
+      h.addEventListener("click", () => {
+        h.parentElement.classList.toggle("open");
+      });
+    });
+  </script>
+
+</body>
+
+</html>

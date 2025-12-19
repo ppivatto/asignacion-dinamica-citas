@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dentalia – Asignación Dinámica (Experiencia)</title>
+
+  <style>
+    :root{
+      --brand:#1f74ff;
+      --brand-2:#0b4fd6;
+      --text:#1b1f2a;
+      --muted:#6b7280;
+      --bg:#f6f8fc;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --ok:#16a34a;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+      --radius:14px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .topbar{
+      background:#fff;
+      border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+    .topbar .wrap{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:14px 18px;
+      max-width:1100px;
+      margin:0 auto;
+    }
+    .logo{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    }
+
+    .container{
+      max-width:1100px;
+      margin:18px auto;
+      padding:0 18px;
+    }
+
+    /* Tabs */
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .tabbtn{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .tabbtn.active{
+      border-color:rgba(31,116,255,.35);
+      box-shadow:0 0 0 3px rgba(31,116,255,.10);
+    }
+
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+    }
+    @media(max-width:900px){
+      .grid{grid-template-columns:1fr;}
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:0 6px 18px rgba(12,20,33,.05);
+    }
+
+    h2{margin:0 0 6px;font-size:18px;}
+    .sub{color:var(--muted);font-size:13px;margin-bottom:14px;}
+
+    label{
+      display:block;
+      font-size:12px;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+
+    input,select,textarea{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:11px 12px;
+      font-size:14px;
+    }
+
+    textarea{min-height:90px}
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    @media(max-width:560px){
+      .row{grid-template-columns:1fr;}
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background:var(--brand);
+      color:#fff;
+      border-color:var(--brand);
+    }
+
+    .status{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px;
+      border:1px dashed var(--border);
+      border-radius:12px;
+      background:#fbfdff;
+    }
+
+    .badge{
+      font-size:12px;
+      font-weight:800;
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .badge.warn{background:rgba(245,158,11,.15);color:#b45309}
+    .badge.ok{background:rgba(22,163,74,.15);color:var(--ok)}
+
+    .hidden{display:none}
+
+    /* ================= TOPBAR GLOBAL ================= */
+
+.topbar{
+  background:#ffffff;
+  border-bottom:1px solid #e5e7eb;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.topbar .wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.logo{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:linear-gradient(135deg,#1f74ff,#0b4fd6);
+  flex-shrink:0;
+}
+
+.brand .title{
+  font-weight:800;
+  font-size:16px;
+  line-height:1.2;
+}
+
+.brand .subtitle{
+  font-size:12px;
+  color:#6b7280;
+}
+
+.menu{
+  margin-left:auto;
+  display:flex;
+  gap:10px;
+}
+
+.menu a{
+  font-size:14px;
+  font-weight:600;
+  color:#374151;
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid #e5e7eb;
+  background:#ffffff;
+}
+
+.menu a:hover{
+  border-color:rgba(31,116,255,.35);
+  background:rgba(31,116,255,.04);
+}
+
+.menu a.active{
+  border-color:rgba(31,116,255,.35);
+  background:rgba(31,116,255,.10);
+  color:#1f74ff;
+}
+
+/* ================================================= */
+
+  </style>
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="logo"></div>
+
+    <div class="brand">
+      <div class="title">Asignación Dinámica de Citas</div>
+      <div class="subtitle">Experiencia Paciente & Profesional</div>
+    </div>
+
+    <nav class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="pantalla-1-experiencia-asignacion-dinamica.html" class="active">Experiencia</a>
+      <a href="pantalla-2-operacion-capacidad-clinica.html">Operación</a>
+      <a href="pantalla-3-procesos-orquestacion.html">Procesos</a>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- =======================================================
+       TABS DE NAVEGACIÓN (SIMULACIÓN DE PANTALLAS)
+  ======================================================== -->
+  <div class="tabs">
+    <button class="tabbtn active" data-tab="paciente-fallback">Paciente · Te buscamos horario</button>
+    <button class="tabbtn" data-tab="paciente-estado">Paciente · Estado</button>
+    <button class="tabbtn" data-tab="profesional-cita">Profesional · Aceptar cita</button>
+    <button class="tabbtn" data-tab="profesional-bloque">Profesional · Aceptar bloque</button>
+  </div>
+
+  <!-- =======================================================
+       PANTALLA 1A – PACIENTE / FALLBACK
+  ======================================================== -->
+  <section id="paciente-fallback" class="grid">
+
+    <div class="card">
+      <h2>Te buscamos un profesional</h2>
+      <p class="sub">No encontramos disponibilidad estándar. Dejanos tu preferencia.</p>
+
+      <div class="row">
+        <div>
+          <label>Clínica o zona</label>
+          <select>
+            <option>Polanco</option>
+            <option>Santa Fe</option>
+          </select>
+        </div>
+        <div>
+          <label>Especialidad</label>
+          <select>
+            <option>Endodoncia</option>
+            <option>Implantología</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <div>
+          <label>Fecha deseada</label>
+          <input type="date">
+        </div>
+        <div>
+          <label>Horario deseado</label>
+          <input type="time">
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <label>Comentarios</label>
+        <textarea placeholder="Ej: sólo domingos temprano"></textarea>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary">Enviar solicitud</button>
+        <button class="btn">Volver a agenda</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Qué sucede ahora</h2>
+      <div class="status">
+        <div>
+          <strong>Estado</strong><br>
+          <span class="sub">Buscando profesional</span>
+        </div>
+        <span class="badge warn">En proceso</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- =======================================================
+       PANTALLA 1B – PACIENTE / ESTADO
+  ======================================================== -->
+  <section id="paciente-estado" class="grid hidden">
+
+    <div class="card">
+      <h2>Estado de tu solicitud</h2>
+      <div class="status">
+        <div>
+          <strong>Solicitud #DA-10421</strong><br>
+          <span class="sub">Dom 08:00 · Endodoncia · Polanco</span>
+        </div>
+        <span class="badge warn">Buscando</span>
+      </div>
+
+      <div class="actions">
+        <button class="btn">Cambiar horario</button>
+        <button class="btn">Cancelar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Resultado</h2>
+      <div class="status">
+        <div>
+          <strong>Profesional asignado</strong><br>
+          <span class="sub">Te notificamos automáticamente</span>
+        </div>
+        <span class="badge ok">Confirmado</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- =======================================================
+       PANTALLA 1C – PROFESIONAL / ACEPTAR CITA PUNTUAL
+  ======================================================== -->
+  <section id="profesional-cita" class="grid hidden">
+
+    <div class="card">
+      <h2>Solicitud disponible</h2>
+      <p class="sub">Cita puntual solicitada por un paciente.</p>
+
+      <div class="status">
+        <div>
+          <strong>Endodoncia · 60 min</strong><br>
+          <span class="sub">Dom 08:00 · Polanco</span>
+        </div>
+        <span class="badge warn">Abierta</span>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary">Aceptar cita</button>
+        <button class="btn">Rechazar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Confirmación</h2>
+      <div class="status">
+        <div>
+          <strong>Cita asignada</strong><br>
+          <span class="sub">Se notificó al paciente</span>
+        </div>
+        <span class="badge ok">OK</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- =======================================================
+       PANTALLA 1D – PROFESIONAL / ACEPTAR BLOQUE (BOXES)
+  ======================================================== -->
+  <section id="profesional-bloque" class="grid hidden">
+
+    <div class="card">
+      <h2>Bloque disponible</h2>
+      <p class="sub">Capacidad publicada por clínica.</p>
+
+      <div class="status">
+        <div>
+          <strong>2 boxes · 4 horas</strong><br>
+          <span class="sub">Mar 19/12 · 14:00–18:00 · Polanco</span>
+        </div>
+        <span class="badge warn">Disponible</span>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary">Aceptar bloque</button>
+        <button class="btn">Rechazar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Resultado</h2>
+      <div class="status">
+        <div>
+          <strong>Bloque asignado</strong><br>
+          <span class="sub">Se actualizó tu agenda</span>
+        </div>
+        <span class="badge ok">Confirmado</span>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+  const btns = document.querySelectorAll(".tabbtn");
+  const sections = document.querySelectorAll("section");
+
+  btns.forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      btns.forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      sections.forEach(s=>s.classList.add("hidden"));
+      document.getElementById(btn.dataset.tab).classList.remove("hidden");
+    });
+  });
+</script>
+
+</body>
+</html>

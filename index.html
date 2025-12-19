@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dentalia · Asignación Dinámica de Citas</title>
+
+  <style>
+    :root {
+      --brand: #1f74ff;
+      --brand-2: #0b4fd6;
+      --bg: #f6f8fc;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --text: #1b1f2a;
+      --muted: #6b7280;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* Topbar */
+    .topbar {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    }
+
+    .title {
+      font-weight: 800;
+    }
+
+    .menu {
+      margin-left: auto;
+      display: flex;
+      gap: 12px;
+    }
+
+    .menu a {
+      font-weight: 600;
+      font-size: 14px;
+      color: #374151;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .menu a:hover {
+      border-color: rgba(31, 116, 255, .35);
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 18px;
+    }
+
+    .intro {
+      max-width: 700px;
+      margin-bottom: 32px;
+    }
+
+    .intro h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+    }
+
+    .intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width:900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(12, 20, 33, .05);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .card a {
+      align-self: flex-start;
+      font-weight: 700;
+      color: #fff;
+      background: var(--brand);
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .card a:hover {
+      background: var(--brand-2);
+    }
+
+    .menu a.active{
+  border-color:rgba(31,116,255,.35);
+  background:rgba(31,116,255,.10);
+  color:#1f74ff;
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="logo"></div>
+      <div class="title">Dentalia · Asignación Dinámica de Citas</div>
+
+      <nav class="menu">
+        <a href="index.html" class="active">Inicio</a>
+        <a href="pantalla-1-experiencia-asignacion-dinamica.html">Experiencia</a>
+        <a href="pantalla-2-operacion-capacidad-clinica.html">Operación</a>
+        <a href="pantalla-3-procesos-orquestacion.html">Procesos</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+
+    <div class="intro">
+      <h1>Propuesta funcional – MVP conceptual</h1>
+      <p>
+        Modelo de asignación dinámica de citas y capacidad clínica,
+        combinando experiencia de paciente, marketplace interno de profesionales
+        y gobierno operativo end-to-end.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <h2>Pantalla 1 · Experiencia</h2>
+        <p>
+          Vistas de paciente y profesional: solicitud de horario,
+          estado de la cita, aceptación de oportunidades y bloques disponibles.
+        </p>
+        <a href="pantalla-1-experiencia-asignacion-dinamica.html">Ver pantalla</a>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <h2>Pantalla 2 · Operación</h2>
+        <p>
+          Monitoreo operativo: oportunidades abiertas, citas propuestas,
+          disponibilidad de boxes y gestión de excepciones.
+        </p>
+        <a href="pantalla-2-operacion-capacidad-clinica.html">Ver pantalla</a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <h2>Pantalla 3 · Procesos</h2>
+        <p>
+          Diagrama funcional de procesos P1–P6:
+          desde la captura de intención hasta confirmación o expiración.
+        </p>
+        <a href="pantalla-3-procesos-orquestacion.html">Ver procesos</a>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

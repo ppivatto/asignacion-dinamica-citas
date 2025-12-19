@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dentalia – Operación y Capacidad Clínica</title>
+
+  <style>
+    :root{
+      --brand:#1f74ff;
+      --text:#1b1f2a;
+      --muted:#6b7280;
+      --bg:#f6f8fc;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --ok:#16a34a;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+      --radius:14px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .topbar{
+      background:#fff;
+      border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+    .topbar .wrap{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:14px 18px;
+      max-width:1100px;
+      margin:0 auto;
+    }
+    .logo{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      background:var(--brand);
+    }
+
+    .container{
+      max-width:1100px;
+      margin:18px auto;
+      padding:0 18px;
+    }
+
+    /* Tabs */
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .tabbtn{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .tabbtn.active{
+      border-color:rgba(31,116,255,.35);
+      box-shadow:0 0 0 3px rgba(31,116,255,.10);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:0 6px 18px rgba(12,20,33,.05);
+    }
+
+    h2{margin:0 0 6px;font-size:18px;}
+    .sub{color:var(--muted);font-size:13px;margin-bottom:14px;}
+
+    label{
+      font-size:12px;
+      font-weight:600;
+      display:block;
+      margin-bottom:6px;
+    }
+
+    input,select{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:11px 12px;
+      font-size:14px;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    @media(max-width:700px){
+      .row{grid-template-columns:1fr;}
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:13px;
+    }
+    th,td{
+      padding:10px 8px;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+    }
+    th{
+      font-size:12px;
+      color:#374151;
+      text-transform:uppercase;
+    }
+
+    .badge{
+      font-size:12px;
+      font-weight:800;
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .ok{background:rgba(22,163,74,.15);color:var(--ok)}
+    .warn{background:rgba(245,158,11,.15);color:#b45309}
+    .bad{background:rgba(239,68,68,.15);color:var(--bad)}
+
+    .actions{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+    }
+    .btn{
+      border:1px solid var(--border);
+      background:#fff;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background:var(--brand);
+      color:#fff;
+      border-color:var(--brand);
+    }
+
+    .hidden{display:none}
+
+    /* ================= TOPBAR GLOBAL ================= */
+
+.topbar{
+  background:#ffffff;
+  border-bottom:1px solid #e5e7eb;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.topbar .wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.logo{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:linear-gradient(135deg,#1f74ff,#0b4fd6);
+  flex-shrink:0;
+}
+
+.brand .title{
+  font-weight:800;
+  font-size:16px;
+  line-height:1.2;
+}
+
+.brand .subtitle{
+  font-size:12px;
+  color:#6b7280;
+}
+
+.menu{
+  margin-left:auto;
+  display:flex;
+  gap:10px;
+}
+
+.menu a{
+  font-size:14px;
+  font-weight:600;
+  color:#374151;
+  text-decoration:none;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid #e5e7eb;
+  background:#ffffff;
+}
+
+.menu a:hover{
+  border-color:rgba(31,116,255,.35);
+  background:rgba(31,116,255,.04);
+}
+
+.menu a.active{
+  border-color:rgba(31,116,255,.35);
+  background:rgba(31,116,255,.10);
+  color:#1f74ff;
+}
+
+/* ================================================= */
+
+  </style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER OPERACIÓN
+========================================================= -->
+<!-- ================= TOPBAR · PANTALLA 2 ================= -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="logo"></div>
+
+    <div class="brand">
+      <div class="title">Asignación Dinámica de Citas</div>
+      <div class="subtitle">Operación · Capacidad Clínica</div>
+    </div>
+
+    <nav class="menu">
+      <a href="index.html">Inicio</a>
+      <a href="pantalla-1-experiencia-asignacion-dinamica.html">Experiencia</a>
+      <a href="pantalla-2-operacion-capacidad-clinica.html" class="active">Operación</a>
+      <a href="pantalla-3-procesos-orquestacion.html">Procesos</a>
+    </nav>
+  </div>
+</div>
+<!-- ====================================================== -->
+
+<div class="container">
+
+  <!-- =======================================================
+       TABS – OPERACIÓN
+  ======================================================== -->
+  <div class="tabs">
+    <button class="tabbtn active" data-tab="monitoreo-solicitudes">Monitoreo de solicitudes</button>
+    <button class="tabbtn" data-tab="gestion-boxes">Gestión de boxes</button>
+    <button class="tabbtn" data-tab="seguimiento-bloques">Seguimiento de bloques</button>
+  </div>
+
+  <!-- =======================================================
+       TAB 2A – MONITOREO DE SOLICITUDES DE PACIENTES
+  ======================================================== -->
+  <section id="monitoreo-solicitudes" class="grid">
+
+    <div class="card">
+      <h2>Solicitudes activas</h2>
+      <p class="sub">Horas solicitadas por pacientes fuera de la agenda estándar.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Clínica</th>
+            <th>Tipo</th>
+            <th>Horario solicitado</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DA-10421</td>
+            <td>Polanco</td>
+            <td>Cita puntual</td>
+            <td>Dom 08:00</td>
+            <td><span class="badge warn">Buscando</span></td>
+            <td><a href="#">Ver</a></td>
+          </tr>
+          <tr>
+            <td>DA-10410</td>
+            <td>Santa Fe</td>
+            <td>Bloque</td>
+            <td>Sáb 14–18</td>
+            <td><span class="badge ok">Aceptada</span></td>
+            <td><a href="#">Ver</a></td>
+          </tr>
+          <tr>
+            <td>DA-10395</td>
+            <td>Andares</td>
+            <td>Cita puntual</td>
+            <td>Vie 19:00</td>
+            <td><span class="badge bad">Expirada</span></td>
+            <td><a href="#">Reintentar</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="actions">
+        <button class="btn">Reintentar</button>
+        <button class="btn">Cerrar solicitud</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- =======================================================
+       TAB 2B – GESTIÓN DE CAPACIDAD (BOXES)
+  ======================================================== -->
+  <section id="gestion-boxes" class="grid hidden">
+
+    <div class="card">
+      <h2>Detección de capacidad libre</h2>
+      <p class="sub">Espacios físicos disponibles para publicar oportunidades.</p>
+
+      <div class="row">
+        <div>
+          <label>Clínica</label>
+          <select>
+            <option>Polanco</option>
+            <option>Santa Fe</option>
+            <option>Andares</option>
+          </select>
+        </div>
+        <div>
+          <label>Día</label>
+          <input type="date">
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <div>
+          <label>Bloque horario</label>
+          <select>
+            <option>09:00 – 13:00</option>
+            <option>14:00 – 18:00</option>
+          </select>
+        </div>
+        <div>
+          <label>Boxes disponibles</label>
+          <select>
+            <option>1</option>
+            <option selected>2</option>
+            <option>3</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary">Publicar oportunidad</button>
+        <button class="btn">Recalcular</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- =======================================================
+       TAB 2C – SEGUIMIENTO DE BLOQUES PUBLICADOS
+  ======================================================== -->
+  <section id="seguimiento-bloques" class="grid hidden">
+
+    <div class="card">
+      <h2>Bloques publicados</h2>
+      <p class="sub">Estado de cobertura de capacidad clínica.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Clínica</th>
+            <th>Día</th>
+            <th>Horario</th>
+            <th>Boxes</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Polanco</td>
+            <td>19/12</td>
+            <td>14–18</td>
+            <td>2</td>
+            <td><span class="badge warn">Abierto</span></td>
+            <td><a href="#">Ver</a></td>
+          </tr>
+          <tr>
+            <td>Santa Fe</td>
+            <td>20/12</td>
+            <td>09–13</td>
+            <td>1</td>
+            <td><span class="badge ok">Asignado</span></td>
+            <td><a href="#">Ver</a></td>
+          </tr>
+          <tr>
+            <td>Andares</td>
+            <td>18/12</td>
+            <td>16–20</td>
+            <td>2</td>
+            <td><span class="badge bad">Expirado</span></td>
+            <td><a href="#">Reintentar</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+  const btns = document.querySelectorAll(".tabbtn");
+  const sections = document.querySelectorAll("section");
+
+  btns.forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      btns.forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      sections.forEach(s=>s.classList.add("hidden"));
+      document.getElementById(btn.dataset.tab).classList.remove("hidden");
+    });
+  });
+</script>
+
+</body>
+</html>
