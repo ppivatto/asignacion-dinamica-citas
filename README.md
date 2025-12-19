@@ -8,4 +8,5 @@ Incluye:
 - Operación y Capacidad Clínica
 - Procesos BPM y Orquestación
 
-🔗 Demo online: https://...
+🔗 Demo online: [https://ppivatto.github.io/asignacion-dinamica-citas/
+](https://ppivatto.github.io/asignacion-dinamica-citas/)
